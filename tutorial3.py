@@ -8,11 +8,11 @@ while True:
     width = int(cap.get(3)) # pega a propriedade 3 da camera de captura, no caso a largura
     height = int(cap.get(4)) # pega a propriedade 4 da camera de captura, no caso a altura
 
-    image = np.zeros(frame.shape, np.uint8)
-    smaller_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
-    image[:height//2, :width//2] = smaller_frame
+    image = np.zeros(frame.shape, np.uint8) # desenha quadro preto
+    smaller_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5) # pega cada frame e diminui ele pela metade
+    image[:height//2, :width//2] = cv2.rotate(smaller_frame, cv2.cv2.ROTATE_180)
     image[height//2:, :width//2] = smaller_frame
-    image[:height//2, width//2:] = smaller_frame
+    image[:height//2, width//2:] = cv2.rotate(smaller_frame, cv2.cv2.ROTATE_180)
     image[height//2:, width//2:] = smaller_frame
 
     cv2.imshow('frame', image)
